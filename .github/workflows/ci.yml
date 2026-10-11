@@ -1,0 +1,26 @@
+name: ComponentHub CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Unit tests (Jest)
+        run: npm test -- --passWithNoTests
+      - name: Check required ComponentHub paths
+        run: |
+          test -f force-app/main/default/lwc/chComponentHost/chComponentHost.js
+          test -f force-app/main/default/classes/CH_QueryService.cls
+          test -f force-app/main/default/classes/CH_MetadataService.cls
+          test -f README.md

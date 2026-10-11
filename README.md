@@ -1,67 +1,129 @@
-# Dynamic Content Restriction
+# Salesforce ComponentHub
 
-Salesforce Apex package that blocks file uploads by **extension + object**.
+**Author:** Rajesh Ediga
 
-Example shipped rule: **`.pdf` files cannot be uploaded to Account**.
+Open-source, metadata-driven library of reusable Lightning Web Components (LWC), secure Apex services, and configuration-based user experiences.
 
-## How it works
+> Blueprint: *Salesforce ComponentHub — Ideas and Architecture* (Rajesh Ediga)
 
-1. Admins define rules in Custom Metadata type `File_Extension_Restriction__mdt`.
-2. Triggers run on:
-   - `ContentVersion` (before insert) — file uploaded directly to a record
-   - `ContentDocumentLink` (before insert) — existing file linked to a record
-3. `FileExtensionRestrictionService` checks the target object and file extension, then blocks the DML with a clear error.
+## Executive summary
 
-User / Group links are ignored so profile photos and private library behavior are not affected.
+ComponentHub is a set of composable packages:
 
-## Configure a restriction
+- Allowlisted **component registry**
+- Declarative **configuration + rules engine** (no `eval`)
+- Shared **secure Apex data services**
+- Reusable UI modules (DataTable, Form, Lookup, Record Viewer, …)
 
-Setup → Custom Metadata Types → **File Extension Restriction** → Manage Records → New
+Recommended first build (implemented in this repository):
 
-| Field | Example | Notes |
-| --- | --- | --- |
-| Label | Account PDF Block | Any label |
-| File Extension Restriction Name | Account_PDF | Unique developer name |
-| Object API Name | `Account` | Works for any object API name |
-| Restricted Extensions | `pdf` | Comma-separated: `pdf,exe,.js` |
-| Is Active | `true` | Uncheck to disable without deleting |
-| Error Message | `Files with extension .{extension} cannot be uploaded to {object} records.` | Optional; supports `{extension}` and `{object}` |
+1. Component Registry (`chComponentRegistry` + `chComponentHost`)
+2. Dynamic DataTable (`chDynamicTable`)
+3. Dynamic Form Builder (`chDynamicForm`)
 
-### More examples
+## Runtime flow
 
-- Block `.exe` and `.js` on Case: Object = `Case`, Extensions = `exe,js`
-- Block `.xlsx` on Opportunity: Object = `Opportunity`, Extensions = `xlsx`
-- Multiple rules for the same object are merged.
+```
+Lightning page → chComponentHost → config validator → rules engine
+→ allowlisted registry → component LWC → UI API / Apex → Salesforce records
+```
 
-Sample metadata included: `File_Extension_Restriction.Account_PDF`.
+## Project layout
 
-## Deploy
+```
+salesforce-componenthub/
+  force-app/main/default/
+    lwc/
+      chComponentHost/
+      chComponentRegistry/
+      chConfigValidator/
+      chRulesEngine/
+      chDynamicTable/
+      chDynamicForm/
+      chDynamicLookup/
+      chDynamicRecordViewer/
+    classes/
+      CH_QueryService.cls
+      CH_MetadataService.cls
+      CH_DmlService.cls
+      CH_PaginationService.cls
+      CH_LookupService.cls
+      CH_ValidationService.cls
+      CH_LoggingService.cls
+      CH_ActionService.cls
+      CH_ComponentHubTest.cls
+      FileExtensionRestrictionService.cls   (existing utility module)
+    customMetadata/
+    objects/
+  config-examples/
+  docs/
+  scripts/
+  .github/workflows/
+  README.md
+  CONTRIBUTING.md
+  SECURITY.md
+  LICENSE
+  sfdx-project.json
+```
+
+## Secure Apex services
+
+| Service | Safeguard |
+| --- | --- |
+| `CH_QueryService` | Object allowlist, field FLS, bind vars / sanitized filters, user-mode |
+| `CH_MetadataService` | Loads/validates published JSON config |
+| `CH_DmlService` | Allowlisted writes with CRUD/FLS |
+| `CH_PaginationService` | Bounded page sizes / keyset helpers |
+| `CH_LookupService` | Search limits + accessible fields |
+| `CH_ValidationService` | Server-side validation independent of client |
+| `CH_LoggingService` | Structured errors without sensitive payloads |
+| `CH_ActionService` | Named allowlisted operations only |
+
+## Quick start
 
 ```bash
-sf org login web --alias myorg
-sf project deploy start --source-dir force-app --target-org myorg
-sf apex run test --class-names FileExtensionRestrictionServiceTest --result-format human --code-coverage --target-org myorg
+sf org login web --alias componenthub
+sf project deploy start --source-dir force-app --target-org componenthub
+sf apex run test --class-names CH_ComponentHubTest,FileExtensionRestrictionServiceTest --result-format human --code-coverage --target-org componenthub
 ```
 
-Or with Metadata API / VS Code Salesforce Extension Pack: deploy the `force-app` folder.
+### Use the host on a Lightning page
 
-## Manual test in the org
+1. Deploy the package.
+2. Edit an App or Record page.
+3. Add **CH Component Host**.
+4. Set **Config Developer Name** to `Sample_Account_Table` or `Sample_Account_Form`.
 
-1. Deploy the package (includes Account PDF rule).
-2. Open any Account → Related → Files → Upload a `.pdf` → expect an error.
-3. Upload a `.txt` on the same Account → should succeed.
-4. Upload a `.pdf` on a Contact → should succeed (rule is Account-only).
+### Sample configuration shape
 
-## Project structure
-
+```json
+{
+  "id": "accounts",
+  "type": "dataTable",
+  "props": {
+    "objectApiName": "Account",
+    "pageSize": 20
+  },
+  "visibleWhen": {
+    "field": "context.hasRecordId",
+    "op": "eq",
+    "value": false
+  }
+}
 ```
-force-app/main/default/
-  classes/
-    FileExtensionRestrictionService.cls
-    FileExtensionRestrictionServiceTest.cls
-  triggers/
-    ContentDocumentLinkTrigger.trigger
-    ContentVersionTrigger.trigger
-  objects/File_Extension_Restriction__mdt/
-  customMetadata/File_Extension_Restriction.Account_PDF.md-meta.xml
-```
+
+## Also included
+
+This repository also contains the **File Extension Restriction** Apex utility (block uploads by extension + object via Custom Metadata). See earlier commits for that module’s behavior.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Configuration schema](docs/configuration-schema.md)
+- [Compatibility matrix](docs/compatibility.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security](SECURITY.md)
+
+## License
+
+MIT © Rajesh Ediga

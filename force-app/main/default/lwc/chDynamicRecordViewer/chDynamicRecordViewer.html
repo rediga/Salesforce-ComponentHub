@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="ComponentHub Record Viewer" icon-name="standard:display_text">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error" role="alert">{errorMessage}</div>
+            </template>
+            <template if:true={hasFields}>
+                <dl class="slds-dl_horizontal">
+                    <template for:each={fieldViews} for:item="item">
+                        <div key={item.fieldName} class="slds-m-bottom_x-small">
+                            <dt class="slds-dl_horizontal__label">{item.fieldName}</dt>
+                            <dd class="slds-dl_horizontal__detail">{item.value}</dd>
+                        </div>
+                    </template>
+                </dl>
+            </template>
+        </div>
+    </lightning-card>
+</template>

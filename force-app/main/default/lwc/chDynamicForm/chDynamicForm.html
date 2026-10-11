@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title={cardTitle} icon-name="standard:form">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-m-bottom_small" role="alert">{errorMessage}</div>
+            </template>
+            <template for:each={fieldList} for:item="fieldName">
+                <lightning-input
+                    key={fieldName}
+                    label={fieldName}
+                    data-field={fieldName}
+                    onchange={handleChange}
+                    class="slds-m-bottom_small">
+                </lightning-input>
+            </template>
+            <lightning-button
+                variant="brand"
+                label="Save"
+                onclick={handleSave}
+                disabled={isSaving}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

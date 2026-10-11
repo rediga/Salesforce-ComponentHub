@@ -1,0 +1,50 @@
+<template>
+    <div class="ch-host slds-p-around_small">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading ComponentHub" size="small"></lightning-spinner>
+        </template>
+
+        <template if:true={errorMessage}>
+            <div class="slds-text-color_error" role="alert">{errorMessage}</div>
+        </template>
+
+        <template if:true={showDataTable}>
+            <c-ch-dynamic-table
+                object-api-name={safeProps.objectApiName}
+                fields={safeProps.fields}
+                page-size={safeProps.pageSize}
+                order-by-field={safeProps.orderByField}
+                order-direction={safeProps.orderDirection}
+                where-clause={safeProps.whereClause}
+                record-id={safeProps.recordId}>
+            </c-ch-dynamic-table>
+        </template>
+
+        <template if:true={showForm}>
+            <c-ch-dynamic-form
+                object-api-name={safeProps.objectApiName}
+                fields={safeProps.fields}
+                mode={safeProps.mode}
+                record-id={safeProps.recordId}>
+            </c-ch-dynamic-form>
+        </template>
+
+        <template if:true={showLookup}>
+            <c-ch-dynamic-lookup
+                object-api-name={safeProps.objectApiName}
+                name-field={safeProps.nameField}
+                limit-size={safeProps.limitSize}
+                label={safeProps.label}
+                value={safeProps.value}>
+            </c-ch-dynamic-lookup>
+        </template>
+
+        <template if:true={showRecordViewer}>
+            <c-ch-dynamic-record-viewer
+                object-api-name={safeProps.objectApiName}
+                fields={safeProps.fields}
+                record-id={safeProps.recordId}>
+            </c-ch-dynamic-record-viewer>
+        </template>
+    </div>
+</template>

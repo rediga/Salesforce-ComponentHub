@@ -1,0 +1,9 @@
+{
+  "id": "accountForm",
+  "type": "form",
+  "props": {
+    "objectApiName": "Account",
+    "mode": "create",
+    "fields": ["Name", "Type", "Phone", "Website"]
+  }
+}

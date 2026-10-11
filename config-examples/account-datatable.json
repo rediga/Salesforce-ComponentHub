@@ -1,0 +1,11 @@
+{
+  "id": "accounts",
+  "type": "dataTable",
+  "props": {
+    "objectApiName": "Account",
+    "fields": ["Name", "Type", "Phone"],
+    "pageSize": 20,
+    "orderByField": "Name",
+    "orderDirection": "ASC"
+  }
+}

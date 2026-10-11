@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Sample Account Form</label>
+    <protected>false</protected>
+    <values>
+        <field>Component_Type__c</field>
+        <value xsi:type="xsd:string">form</value>
+    </values>
+    <values>
+        <field>Config_JSON__c</field>
+        <value xsi:type="xsd:string">{
+  "id": "accountForm",
+  "type": "form",
+  "props": {
+    "objectApiName": "Account",
+    "mode": "edit",
+    "fields": ["Name", "Type", "Phone", "Website"]
+  }
+}</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Version__c</field>
+        <value xsi:type="xsd:string">0.1.0</value>
+    </values>
+</CustomMetadata>

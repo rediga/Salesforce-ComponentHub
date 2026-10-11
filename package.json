@@ -1,0 +1,17 @@
+{
+  "name": "salesforce-componenthub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Salesforce ComponentHub — reusable LWC and Apex library by Rajesh Ediga",
+  "author": "Rajesh Ediga",
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "sfdx-lwc-jest",
+    "test:unit:watch": "sfdx-lwc-jest --watch",
+    "lint": "eslint force-app/main/default/lwc/**/*.js"
+  },
+  "devDependencies": {
+    "@salesforce/sfdx-lwc-jest": "^5.1.0",
+    "eslint": "^8.57.0"
+  }
+}

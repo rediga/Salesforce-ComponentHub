@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="ComponentHub DataTable" icon-name="standard:related_list">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error" role="alert">{errorMessage}</div>
+            </template>
+            <template if:true={hasRecords}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={records}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template if:true={hasMore}>
+                <div class="slds-m-top_small">
+                    <lightning-button label="Load more" onclick={handleLoadMore}></lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

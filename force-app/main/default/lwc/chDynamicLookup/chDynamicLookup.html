@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title={label} icon-name="standard:search">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <lightning-input
+                label="Search"
+                value={searchTerm}
+                onchange={handleSearchChange}
+                class="slds-m-bottom_small">
+            </lightning-input>
+            <lightning-button label="Search" onclick={handleSearch} class="slds-m-bottom_small"></lightning-button>
+            <template if:true={selectedLabel}>
+                <p class="slds-m-bottom_small">Selected: {selectedLabel}</p>
+            </template>
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error" role="alert">{errorMessage}</div>
+            </template>
+            <template if:true={hasOptions}>
+                <ul class="slds-list_dotted">
+                    <template for:each={options} for:item="option">
+                        <li key={option.id}>
+                            <a href="#" data-id={option.id} data-label={option.label} onclick={handleSelect}>
+                                {option.label}
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+    </lightning-card>
+</template>

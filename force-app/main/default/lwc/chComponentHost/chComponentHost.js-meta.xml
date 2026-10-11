@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>CH Component Host</masterLabel>
+    <description>ComponentHub host by Rajesh Ediga — loads declarative config and renders allowlisted LWCs</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="configDeveloperName" type="String" label="Config Developer Name" description="CH_Component_Definition__mdt developer name" required="true"/>
+            <property name="recordId" type="String" label="Record Id"/>
+            <property name="objectApiName" type="String" label="Object API Name"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

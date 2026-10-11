@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Sample Account Table</label>
+    <protected>false</protected>
+    <values>
+        <field>Component_Type__c</field>
+        <value xsi:type="xsd:string">dataTable</value>
+    </values>
+    <values>
+        <field>Config_JSON__c</field>
+        <value xsi:type="xsd:string">{
+  "id": "accounts",
+  "type": "dataTable",
+  "props": {
+    "objectApiName": "Account",
+    "fields": ["Name", "Type", "Phone"],
+    "pageSize": 20,
+    "orderByField": "Name",
+    "orderDirection": "ASC"
+  }
+}</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Version__c</field>
+        <value xsi:type="xsd:string">0.1.0</value>
+    </values>
+</CustomMetadata>

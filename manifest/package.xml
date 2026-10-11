@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>CH_ActionService</members>
+        <members>CH_ComponentHubTest</members>
+        <members>CH_DmlService</members>
+        <members>CH_LoggingService</members>
+        <members>CH_LookupService</members>
+        <members>CH_MetadataService</members>
+        <members>CH_PaginationService</members>
+        <members>CH_QueryService</members>
+        <members>CH_ValidationService</members>
         <members>FileExtensionRestrictionService</members>
         <members>FileExtensionRestrictionServiceTest</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>ContentDocumentLinkTrigger</members>
-        <members>ContentVersionTrigger</members>
-        <name>ApexTrigger</name>
+        <members>chComponentHost</members>
+        <members>chComponentRegistry</members>
+        <members>chConfigValidator</members>
+        <members>chDynamicForm</members>
+        <members>chDynamicLookup</members>
+        <members>chDynamicRecordViewer</members>
+        <members>chDynamicTable</members>
+        <members>chRulesEngine</members>
+        <name>LightningComponentBundle</name>
     </types>
     <types>
+        <members>CH_Component_Definition__mdt</members>
+        <members>CH_Object_Allowlist__mdt</members>
         <members>File_Extension_Restriction__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
+        <members>CH_Component_Definition.Sample_Account_Form</members>
+        <members>CH_Component_Definition.Sample_Account_Table</members>
+        <members>CH_Object_Allowlist.Account</members>
+        <members>CH_Object_Allowlist.Contact</members>
         <members>File_Extension_Restriction.Account_PDF</members>
         <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>ContentDocumentLinkTrigger</members>
+        <members>ContentVersionTrigger</members>
+        <name>ApexTrigger</name>
     </types>
     <version>62.0</version>
 </Package>

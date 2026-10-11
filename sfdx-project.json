@@ -2,10 +2,13 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "Salesforce ComponentHub",
+      "versionName": "Winter 26",
+      "versionNumber": "0.1.0.NEXT"
     }
   ],
-  "name": "dynamic-content-restriction",
+  "name": "salesforce-componenthub",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "62.0"
