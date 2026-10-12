@@ -135,4 +135,43 @@ private class CH_ComponentHubTest {
         System.assertEquals(true, config.isActive);
         System.assertEquals(true, String.isNotBlank(config.configJson));
     }
+
+    @IsTest
+    static void metadata_loadsSampleAccountContactsRelatedList() {
+        Test.startTest();
+        CH_MetadataService.ComponentConfig config =
+            CH_MetadataService.getComponentConfig('Sample_Account_Contacts');
+        Test.stopTest();
+        System.assertEquals('relatedList', config.componentType);
+        System.assertEquals(true, config.isActive);
+        System.assertEquals(true, config.configJson.contains('parentFieldApiName'));
+    }
+
+    @IsTest
+    static void query_relatedContactsByAccountId() {
+        Account accountRecord = new Account(Name = 'Related List Hub Account');
+        insert accountRecord;
+        insert new Contact(LastName = 'Related', AccountId = accountRecord.Id);
+
+        CH_QueryService.QueryRequest request = new CH_QueryService.QueryRequest();
+        request.objectApiName = 'Contact';
+        request.fields = new List<String>{ 'Name', 'AccountId' };
+        request.whereClause = 'AccountId = \'' + accountRecord.Id + '\'';
+        request.pageSize = 10;
+        request.orderByField = 'Name';
+        request.orderDirection = 'ASC';
+
+        Test.startTest();
+        CH_QueryService.QueryResult result = CH_QueryService.queryRecords(request);
+        Test.stopTest();
+
+        System.assertEquals(1, result.returnedSize);
+        System.assertEquals(accountRecord.Id, (Id) result.records[0].get('AccountId'));
+    }
+
+    @IsTest
+    static void validation_acceptsRelatedListType() {
+        CH_ValidationService.assertComponentType('relatedList');
+        System.assertEquals(true, CH_ValidationService.isAllowedComponentType('relatedList'));
+    }
 }

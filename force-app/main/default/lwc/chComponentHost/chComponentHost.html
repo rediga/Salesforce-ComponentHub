@@ -46,5 +46,18 @@
                 record-id={safeProps.recordId}>
             </c-ch-dynamic-record-viewer>
         </template>
+
+        <template if:true={showRelatedList}>
+            <c-ch-dynamic-related-list
+                object-api-name={safeProps.objectApiName}
+                parent-field-api-name={safeProps.parentFieldApiName}
+                fields={safeProps.fields}
+                page-size={safeProps.pageSize}
+                order-by-field={safeProps.orderByField}
+                order-direction={safeProps.orderDirection}
+                record-id={safeProps.recordId}
+                title={safeProps.title}>
+            </c-ch-dynamic-related-list>
+        </template>
     </div>
 </template>

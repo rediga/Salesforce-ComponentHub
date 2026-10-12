@@ -9,7 +9,7 @@ A component definition includes `id`, `type`, `props`, optional `visibleWhen`, a
 | Field | Type | Notes |
 | --- | --- | --- |
 | `id` | string | Stable configuration identifier |
-| `type` | string | Must be registered (`dataTable`, `form`, `lookup`, `recordViewer`, …) |
+| `type` | string | Must be registered (`dataTable`, `form`, `lookup`, `recordViewer`, `relatedList`, …) |
 | `props` | object | Filtered by per-type allowlist in `chComponentRegistry` |
 
 ## `visibleWhen` predicate

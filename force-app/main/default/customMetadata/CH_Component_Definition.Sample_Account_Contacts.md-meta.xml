@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Sample Account Contacts</label>
+    <protected>false</protected>
+    <values>
+        <field>Component_Type__c</field>
+        <value xsi:type="xsd:string">relatedList</value>
+    </values>
+    <values>
+        <field>Config_JSON__c</field>
+        <value xsi:type="xsd:string">{
+  "id": "accountContacts",
+  "type": "relatedList",
+  "props": {
+    "objectApiName": "Contact",
+    "parentFieldApiName": "AccountId",
+    "fields": ["Name", "Email", "Phone", "Title"],
+    "pageSize": 10,
+    "orderByField": "Name",
+    "orderDirection": "ASC",
+    "title": "Related Contacts"
+  },
+  "visibleWhen": {
+    "field": "context.hasRecordId",
+    "op": "eq",
+    "value": true
+  }
+}</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Version__c</field>
+        <value xsi:type="xsd:string">0.1.0</value>
+    </values>
+</CustomMetadata>

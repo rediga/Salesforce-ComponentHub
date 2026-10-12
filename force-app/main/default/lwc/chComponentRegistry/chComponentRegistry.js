@@ -6,6 +6,7 @@ import CH_DYNAMIC_TABLE from 'c/chDynamicTable';
 import CH_DYNAMIC_FORM from 'c/chDynamicForm';
 import CH_DYNAMIC_LOOKUP from 'c/chDynamicLookup';
 import CH_DYNAMIC_RECORD_VIEWER from 'c/chDynamicRecordViewer';
+import CH_DYNAMIC_RELATED_LIST from 'c/chDynamicRelatedList';
 
 const REGISTRY = Object.freeze({
     dataTable: {
@@ -45,6 +46,19 @@ const REGISTRY = Object.freeze({
             'objectApiName',
             'fields',
             'recordId'
+        ])
+    },
+    relatedList: {
+        ctor: CH_DYNAMIC_RELATED_LIST,
+        allowedProps: Object.freeze([
+            'objectApiName',
+            'parentFieldApiName',
+            'fields',
+            'pageSize',
+            'orderByField',
+            'orderDirection',
+            'recordId',
+            'title'
         ])
     }
 });
