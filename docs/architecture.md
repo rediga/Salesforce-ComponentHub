@@ -9,7 +9,7 @@
 | Registry + renderer | Maps approved component keys to statically imported LWCs; rejects unknown types |
 | Rules engine | Evaluates declarative visibility predicates; no `eval` |
 | Data and action services | UI API / LDS first; Apex for authorized queries and writes |
-| Component modules | DataTable, Form, Lookup, Record Viewer, … |
+| Component modules | DataTable, Form, Lookup, Record Viewer, Related List, … |
 | Observability / CI | Unit tests, static analysis, configuration validation |
 
 ## Packaging constraints

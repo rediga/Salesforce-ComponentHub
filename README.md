@@ -20,6 +20,8 @@ Recommended first build (implemented in this repository):
 1. Component Registry (`chComponentRegistry` + `chComponentHost`)
 2. Dynamic DataTable (`chDynamicTable`)
 3. Dynamic Form Builder (`chDynamicForm`)
+4. Dynamic Related List (`chDynamicRelatedList`)
+5. Dynamic Lookup + Dynamic Record Viewer
 
 ## Runtime flow
 
@@ -42,6 +44,7 @@ salesforce-componenthub/
       chDynamicForm/
       chDynamicLookup/
       chDynamicRecordViewer/
+      chDynamicRelatedList/
     classes/
       CH_QueryService.cls
       CH_MetadataService.cls
@@ -92,7 +95,7 @@ sf apex run test --class-names CH_ComponentHubTest,FileExtensionRestrictionServi
 1. Deploy the package.
 2. Edit an App or Record page.
 3. Add **CH Component Host**.
-4. Set **Config Developer Name** to `Sample_Account_Table` or `Sample_Account_Form`.
+4. Set **Config Developer Name** to `Sample_Account_Table`, `Sample_Account_Form`, or `Sample_Account_Contacts` (related list; place on an Account record page).
 
 ### Sample configuration shape
 

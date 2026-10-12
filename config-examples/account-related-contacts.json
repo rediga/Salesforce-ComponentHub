@@ -1,0 +1,18 @@
+{
+  "id": "accountContacts",
+  "type": "relatedList",
+  "props": {
+    "objectApiName": "Contact",
+    "parentFieldApiName": "AccountId",
+    "fields": ["Name", "Email", "Phone", "Title"],
+    "pageSize": 10,
+    "orderByField": "Name",
+    "orderDirection": "ASC",
+    "title": "Related Contacts"
+  },
+  "visibleWhen": {
+    "field": "context.hasRecordId",
+    "op": "eq",
+    "value": true
+  }
+}

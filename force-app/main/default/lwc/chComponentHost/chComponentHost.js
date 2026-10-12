@@ -72,6 +72,9 @@ export default class ChComponentHost extends LightningElement {
     get showRecordViewer() {
         return this.isVisible && this.config?.type === 'recordViewer';
     }
+    get showRelatedList() {
+        return this.isVisible && this.config?.type === 'relatedList';
+    }
 
     get tableProps() {
         return this.safeProps;
